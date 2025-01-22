@@ -51,12 +51,29 @@ def transcribe_audio(file_path, chunk_duration=60):
 
     return " ".join(transcription)
 
+def save_transcription_to_file(transcription, output_path):
+    """
+    Saves the transcription to a text file.
+
+    Args:
+        transcription (str): The transcribed text.
+        output_path (str): Path to save the transcription file.
+    """
+    with open(output_path, "w") as file:
+        file.write(transcription)
+    print(f"Transcription saved to: {output_path}")
+
 # Test the function
 if __name__ == "__main__":
     audio_file = input("Enter the path to your audio file (e.g., audio.mp3): ")
     if os.path.exists(audio_file):
         print("Loading audio...")
         transcription = transcribe_audio(audio_file)
+
+        # Save the transcription to a file
+        output_file = input("Enter the path to save the transcription (e.g., transcription.txt): ")
+        save_transcription_to_file(transcription, output_file)
+
         print("\nTranscription:\n", transcription)
     else:
         print("File not found. Please check the path and try again.")
